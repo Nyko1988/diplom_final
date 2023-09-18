@@ -1,0 +1,42 @@
+Charging the battery
+Charge the battery before using it for the first time or when it has been unused for extended periods.
+Wired charging
+Connect the USB cable to the USB power adaptor and plug the cable into the device’s multipurpose jack to charge the battery. 
+After fully charging, disconnect the charger from the device.
+Wireless charging
+The device has a built-in wireless charging coil. 
+You can charge the battery using a wireless charger (sold separately).
+Fold the device before charging the battery. 
+Place the centre of the device’s back on the centre of the wireless charger to charge the battery. 
+After fully charging, disconnect the device from the wireless charger.
+The estimated charging time will appear on the notification panel. 
+The actual charging time assumes that the device is not in use, and it may vary depending on the charging conditions. 
+Wireless charging may not work smoothly depending on the type of accessory or cover. 
+For stable wireless charging, it is recommended to separate the cover or accessory from the device.
+Precautions for wireless charging
+If you do not follow the precautions below, the device may not charge properly or may overheat, or the device and any cards may be damaged.
+Do not place the device on the wireless charger with a credit card or radio-frequency identification (RFID) card (such as a transportation card or a key card) placed between the back of the device and the device cover.
+Do not place the device on the wireless charger when conductive materials, such as metal objects and magnets, are placed between the device and the wireless charger.
+If you use the wireless charger in areas with weak network signals, you may lose network reception.
+Use Samsung-approved wireless chargers. 
+If you use other wireless chargers, the battery may not charge properly.
+If you use a wireless charge stand, your device may not be securely mounted or may not charge properly. 
+It is recommended to use a wireless charge pad.
+Quick charging
+Launch the Settings app, tap Battery and device care → Battery → More battery settings, and then activate the feature you want.
+Fast charging: To use the fast charging feature, use a battery charger that supports 
+Adaptive fast charging.
+Fast wireless charging: To use this feature, use a charger and components that support the fast wireless charging feature.
+You can charge the battery more quickly while the device or its screen is turned off.
+If the wireless charger has an internal fan, the fan may produce noise during fast wireless charging. 
+Add a routine to set the fast wireless charging feature to turn off automatically at the preset time using Routines. 
+When the fast wireless charging feature turns off, the charger’s fan noise and the indicator light will be reduced.
+Wireless power sharing
+You can charge another device with your device’s battery. 
+You can still charge another device even while charging your device. 
+Depending on the type of accessories or cover being used, the Wireless power sharing feature may not work properly. 
+It is recommended to remove any accessories and cover being used before using this feature.
+Open the notification panel, swipe downwards, and then tap (Wireless power sharing) to activate it. 
+If you cannot find (Wireless power sharing) on the quick panel, tap and drag the button over to add it.
+Fold the device.
+Place the other device on the centre of your device, with their backs facing.

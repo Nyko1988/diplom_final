@@ -33,7 +33,7 @@ min_sent_len = 10
 max_sent_len = 200
 
 # We base the scoring on k nearest neighbors for each element
-knn_neighbors = 4
+knn_neighbors = 1
 
 # Min score for text pairs. Note, score can be larger than 1
 min_threshold = 1

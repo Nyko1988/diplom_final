@@ -30,7 +30,7 @@ def kNN(x, y, k, use_ann_search=False, ann_num_clusters=32768, ann_num_cluster_p
     start_time = time.time()
     if use_ann_search:
         print("Perform approx. kNN search")
-        n_cluster = min(ann_num_clusters, int(y.shape[0]/1000))
+        n_cluster = min(ann_num_clusters, int(y.shape[0]))
         quantizer = faiss.IndexFlatIP(y.shape[1])
         index = faiss.IndexIVFFlat(quantizer, y.shape[1], n_cluster, faiss.METRIC_INNER_PRODUCT)
         index.nprobe = ann_num_cluster_probe

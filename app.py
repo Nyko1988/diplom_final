@@ -18,7 +18,7 @@ def get_entry():
 
 win = tk.Tk()
 win.title('Par corpus')
-photo = tk.PhotoImage(file='Tests/icon.png')
+photo = tk.PhotoImage(file='work_variant/icon.png')
 win.iconphoto(False, photo)
 win.config(bg='white')
 win.geometry("700x600+10+10")

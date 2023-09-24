@@ -4,6 +4,7 @@ from tkinter import filedialog
 import fitz  # PyMuPDF library
 from PIL import Image
 from PIL import ImageTk
+from compare_sent import create_paralel_sent
 
 
 class PDFViewerApp:
@@ -14,7 +15,7 @@ class PDFViewerApp:
         self.root = root
         self.root.title("Parallel corpus helper")
         self.root.geometry("1500x700")
-        tk.PhotoImage(file='../work_variant/icon.png')
+        tk.PhotoImage(file='icon.png')
 
         self.my_menu = tk.Menu(root)
         self.root.config(menu=self.my_menu)
@@ -55,6 +56,12 @@ class PDFViewerApp:
         button_read_eng_file = tk.Button(frame2, text='Read content eng file', width=20,
                                          command=lambda: self.read_pages_content(self.content_eng_file))
         button_read_eng_file.grid(row=3, column=0, columnspan=2, padx=1, pady=1)
+
+        # create button compare content
+        button_compare_content = tk.Button(frame2, text='Compare content', width=20,
+                                           command=lambda: create_paralel_sent(self.content_ukr_file,
+                                                                                self.content_eng_file))
+        button_compare_content.grid(row=4, column=0, columnspan=2, padx=1, pady=1)
 
         # create first widget entry
         self.entry_first_row_of_content = tk.Entry(frame2, justify=tk.RIGHT, font=('Arial', 15), width=10)
@@ -122,12 +129,15 @@ class PDFViewerApp:
             for i in range(len(result) - 1):
                 if not prev_was_number:
                     if result[i].isdigit() and result[i + 1].isdigit() is not True:
-                        temp_dict = {'concurrence': False, 'text': result[i + 1], 'page': None}
-                        result_dict[int(result[i])] = temp_dict
+                        temp_dict = {'concurrence': False, 'page': result[i], 'page_another_lang': None}
+                        result_dict[(result[i + 1])] = temp_dict
                         prev_was_number = True
                 else:
                     prev_was_number = False
         print(result_dict)
+        return result_dict
+
+    #compare_comtent = create_paralel_sent()
 
     def clear_canvas(self):
         self.canvas.delete("all")

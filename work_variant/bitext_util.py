@@ -1,16 +1,6 @@
-"""
-This file contains some utilities functions used to find parallel sentences
-in two monolingual corpora.
-
-Code in this file has been adapted from the LASER repository:
-https://github.com/facebookresearch/LASER
-"""
-
 import faiss
 import numpy as np
 import time
-import gzip
-import lzma
 
 ########  Functions to find and score candidates
 def score(x, y, fwd_mean, bwd_mean, margin):
@@ -46,12 +36,3 @@ def kNN(x, y, k, use_ann_search=False, ann_num_clusters=32768, ann_num_cluster_p
     print("Done: {:.2f} sec".format(time.time()-start_time))
     return sim, ind
 
-
-def file_open(filepath):
-    #Function to allowing opening files based on file extension
-    if filepath.endswith('.gz'):
-        return gzip.open(filepath, 'rt', encoding='utf8')
-    elif filepath.endswith('xz'):
-        return lzma.open(filepath, 'rt', encoding='utf8')
-    else:
-        return open(filepath, 'r', encoding='utf8')

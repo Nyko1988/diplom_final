@@ -1,19 +1,16 @@
 from sentence_transformers import SentenceTransformer, models
 import numpy as np
 from bitext_util import *
-import gzip
 import tqdm
 from sklearn.decomposition import PCA
 import torch
 
 
-def create_paralel_sent(source_dict: dict, target_dict: dict):
+def create_paralel_sent(source_dict: dict, target_dict: dict, common_final_dict:dict):
     # Model we want to use for bitext mining. LaBSE achieves state-of-the-art performance
     model_name = 'LaBSE'
     model = SentenceTransformer(model_name)
 
-    # створюємо новий словник який буде повернуто як результат роботи функції
-    common_final_dict = {}
 
     # Input files. We interpret every line as sentence.
     source_file = list(source_dict.keys())
@@ -145,12 +142,11 @@ def create_paralel_sent(source_dict: dict, target_dict: dict):
         if src_ind not in seen_src and trg_ind not in seen_trg:
             seen_src.add(src_ind)
             seen_trg.add(trg_ind)
-            #fOut.write("{:.4f}\t{}\t{}\n".format(scores[i], source_sentences[src_ind].replace("\t", " "),
-            #                                         target_sentences[trg_ind].replace("\t", " ")))
             common_final_dict[source_sentences[src_ind]] = source_dict.get(source_sentences[src_ind])
             common_final_dict[source_sentences[src_ind]]['corresponding sentence'] = target_dict.get(target_sentences[trg_ind])
             common_final_dict[source_sentences[src_ind]]['corresponding sentence']['sentence'] = target_sentences[trg_ind]
             sentences_written += 1
 
     print("Done.'\n' {} sentences written".format(common_final_dict))
+    print(len(common_final_dict))
     return common_final_dict

@@ -5,13 +5,17 @@ import fitz  # PyMuPDF library
 from PIL import Image
 from PIL import ImageTk
 from compare_sent import create_paralel_sent
+from parallel_sent import read_pages_content_in_parallel
 
 
 class PDFViewerApp:
     def __init__(self, root):
         self.pdf_document = None
+        self.source_pdf_document = None
+        self.target_pdf_document = None
         self.content_ukr_file = {}
         self.content_eng_file = {}
+        self.content_common_file = {}
         self.root = root
         self.root.title("Parallel corpus helper")
         self.root.geometry("1500x700")
@@ -49,19 +53,29 @@ class PDFViewerApp:
 
         # create button read ukr file
         button_read_ukr_file = tk.Button(frame2, text='Read content ukr file', width=20,
-                                         command=lambda: self.read_pages_content(self.content_ukr_file))
+                                         command=lambda: self.read_pages_content(self.content_ukr_file,
+                                                                                 True))
         button_read_ukr_file.grid(row=2, column=0, columnspan=2, padx=1, pady=1)
 
         # create button read eng file
         button_read_eng_file = tk.Button(frame2, text='Read content eng file', width=20,
-                                         command=lambda: self.read_pages_content(self.content_eng_file))
+                                         command=lambda: self.read_pages_content(self.content_eng_file,
+                                                                                 False))
         button_read_eng_file.grid(row=3, column=0, columnspan=2, padx=1, pady=1)
 
         # create button compare content
         button_compare_content = tk.Button(frame2, text='Compare content', width=20,
                                            command=lambda: create_paralel_sent(self.content_ukr_file,
-                                                                                self.content_eng_file))
+                                                                               self.content_eng_file,
+                                                                               self.content_common_file))
         button_compare_content.grid(row=4, column=0, columnspan=2, padx=1, pady=1)
+
+        # create button compare sentences
+        button_compare_sent = tk.Button(frame2, text='Compare sentences', width=20,
+                                        command=lambda: read_pages_content_in_parallel(self.content_common_file,
+                                                                                       self.source_pdf_document,
+                                                                                       self.target_pdf_document))
+        button_compare_sent.grid(row=5, column=0, columnspan=2, padx=1, pady=1)
 
         # create first widget entry
         self.entry_first_row_of_content = tk.Entry(frame2, justify=tk.RIGHT, font=('Arial', 15), width=10)
@@ -109,11 +123,12 @@ class PDFViewerApp:
 
         return photo
 
-    def read_pages_content(self, result_dict):
+    def read_pages_content(self, result_dict, pdf_document_set):
         """читаємо зміст і наповнюємо словник де ключ є сторінка а значення - назва розділу"""
         start_page_of_content = int(self.entry_first_row_of_content.get()) - 1
         final_page_of_content = int(self.entry_second_row_of_content.get())
         doc = self.pdf_document
+
         for page in range(start_page_of_content, final_page_of_content):
             content = doc[page]
             example_content = content.get_text()
@@ -129,15 +144,23 @@ class PDFViewerApp:
             for i in range(len(result) - 1):
                 if not prev_was_number:
                     if result[i].isdigit() and result[i + 1].isdigit() is not True:
-                        temp_dict = {'concurrence': False, 'page': result[i], 'page_another_lang': None}
+                        temp_dict = {'start_page': result[i],
+                                     'final page': result[i + 2] if i + 2 < len(result) else len(doc),
+                                     'next section': result[i + 3] if i + 3 < len(result) else '-'}
                         result_dict[(result[i + 1])] = temp_dict
                         prev_was_number = True
                 else:
                     prev_was_number = False
-        print(result_dict)
-        return result_dict
 
-    #compare_comtent = create_paralel_sent()
+        if pdf_document_set:
+            self.source_pdf_document = self.pdf_document
+        else:
+            self.target_pdf_document = self.pdf_document
+        print(result_dict)
+        print('Кількість пунктів меню: {}'.format(len(result_dict)))
+        return result_dict, pdf_document_set
+
+    # compare_comtent = create_paralel_sent()
 
     def clear_canvas(self):
         self.canvas.delete("all")
